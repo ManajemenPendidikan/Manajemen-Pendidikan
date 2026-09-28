@@ -76,10 +76,10 @@
         .lamp-login-form {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
-            padding: 2rem; /* Disesuaikan agar tidak terlalu tinggi */
+            padding: 2rem; 
             border-radius: 20px;
             width: 100%;
-            max-width: 400px; /* Diperlebar agar memanjang ke samping */
+            max-width: 400px; 
             border: 1px solid rgba(255, 255, 255, 0.1);
             transform: translateY(30px);
             opacity: 0;
@@ -246,7 +246,7 @@
         </nav>
 
         <div class="p-4 border-t border-emerald-800/50">
-            <p class="text-[10px] text-emerald-300 text-center mb-3">MANAJEMEN PESERTA DIDIK - 2026/2027<br>Ach Faizol M.(125)<br>Meilina Nuril M. (128)<br>Lenita Rahmawati (138)</p>
+            <p class="text-[10px] text-emerald-300 text-center mb-3">MANAJEMEN PESERTA DIDIK - 2026/2027<br>Ach Faizol M. (125)<br>Meilina Nuril Maulida (128)<br> Lenita Rahmawati (138)</p>
             <button onclick="logout()" class="w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-emerald-50 bg-emerald-800/60 hover:bg-emerald-700 rounded-lg transition">
                 <i class="fas fa-sign-out-alt"></i> Keluar
             </button>
@@ -503,7 +503,7 @@
                     </button>
                 </div>
                 <div class="bg-white border border-gray-200 rounded-md shadow-sm overflow-hidden">
-                    <div class="p-5 border-b border-gray-100 flex flex-wrap gap-4 items-end bg-gray-50/50">
+                    <div class="p-5 border-b border-gray-100 flex gap-4 items-end bg-gray-50/50">
                         <div><label class="block text-xs font-bold text-gray-600 mb-1.5">Tanggal</label><input type="date" value="2026-09-25" class="border border-gray-200 rounded p-2 text-sm w-40 outline-none focus:border-[#198754]"></div>
                         <div><label class="block text-xs font-bold text-gray-600 mb-1.5">Filter Kelas</label><select id="filter-kehadiran-kelas" class="border border-gray-200 rounded p-2 text-sm w-40 outline-none focus:border-[#198754]"></select></div>
                         <button onclick="renderTabelKehadiran()" class="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded text-sm font-medium shadow-sm h-[38px]"><i class="fas fa-search"></i> Tampilkan</button>
@@ -636,8 +636,10 @@
                                     <label class="block text-xs font-bold text-gray-600 mb-1.5">Siswa <span class="text-red-500">*</span> <span id="label-multi" class="text-[10px] text-gray-400 font-normal italic hidden">(Tahan CTRL untuk pilih banyak di mode Kelompok)</span></label>
                                     
                                     <div id="wrap-siswa-individu">
+                                        <!-- INPUT AUTOCOMPLETE UNTUK INDIVIDU -->
                                         <input type="text" id="fkons-siswa-individu" list="list-semua-siswa" placeholder="Ketik nama siswa..." autocomplete="off" class="w-full border border-gray-200 rounded p-2 text-sm bg-white outline-none focus:border-[#198754]">
                                     </div>
+                                    <!-- SELECT MULTIPLE UNTUK KELOMPOK -->
                                     <div id="wrap-siswa-kelompok" class="hidden">
                                         <select id="fkons-siswa-kelompok" multiple class="w-full border border-gray-200 rounded p-2 text-sm bg-white outline-none focus:border-[#198754] h-24"></select>
                                     </div>
@@ -679,8 +681,8 @@
             <!-- 6. FORM SURAT -->
             <div id="view-form-surat" class="view-section hidden max-w-5xl mx-auto">
                 <div class="mb-6"><h2 class="text-2xl font-bold text-gray-800 mb-1">Buat Surat Otomatis</h2></div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="md:col-span-2 bg-white rounded-md border border-gray-200 shadow-sm p-6 space-y-5">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 bg-white rounded-md border border-gray-200 shadow-sm p-6 space-y-5">
                         <h3 class="text-sm font-bold text-gray-700 border-b border-gray-100 pb-2"><i class="far fa-envelope mr-2"></i>Data Surat</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div><label class="block text-xs font-bold text-gray-600 mb-1.5">Jenis Surat</label><select id="fsurat-jenis" class="w-full border border-gray-200 rounded p-2 text-sm outline-none focus:border-[#198754]"><option>Surat Pemanggilan Orang Tua</option><option>Surat Perjanjian</option></select></div>
@@ -689,6 +691,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div>
                                 <label class="block text-xs font-bold text-gray-600 mb-1.5">Siswa <span class="text-red-500">*</span></label>
+                                <!-- INPUT AUTOCOMPLETE -->
                                 <input type="text" id="fsurat-siswa" list="list-semua-siswa" placeholder="Ketik nama siswa..." autocomplete="off" class="w-full border border-gray-200 rounded p-2 text-sm outline-none focus:border-[#198754]">
                             </div>
                             <div><label class="block text-xs font-bold text-gray-600 mb-1.5">Konseling Terkait (Otomatis)</label><select id="fsurat-konseling" class="w-full border border-gray-200 rounded p-2 text-sm bg-gray-50 outline-none focus:border-[#198754]"><option value="">-- Tidak Ada --</option></select></div>
@@ -765,16 +768,25 @@
         </div>
     </div>
 
-    <!-- Modal Catat Kasus -->
+    <!-- Modal Catat Kasus dari Menu Jenis Kasus (DI SINI PENAMBAHAN KOLOM KELAS) -->
     <div id="modal-catat-kasus" class="hidden fixed inset-0 bg-slate-900/40 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
-        <div class="bg-white rounded-md shadow-xl w-full max-w-md overflow-hidden">
+        <div class="bg-white rounded-md shadow-xl w-full max-w-lg overflow-hidden">
             <div class="p-5 border-b border-red-100 bg-red-50 flex justify-between items-center"><h3 class="font-bold text-red-800"><i class="fas fa-exclamation-circle mr-2"></i>Catat Kejadian (Log Kasus)</h3><button onclick="tutupModalCatatKasus()"><i class="fas fa-times text-red-400 hover:text-red-600"></i></button></div>
             <div class="p-6 space-y-5">
                 <div><label class="block text-xs font-semibold text-gray-600 mb-1.5 uppercase">Tanggal Kejadian</label><input type="date" id="input-kasus-tanggal" class="w-full border border-gray-200 rounded p-2.5 text-sm bg-white outline-none focus:border-[#198754]"></div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 mb-1.5 uppercase">Siswa</label>
-                    <input type="text" id="input-kasus-siswa" list="list-semua-siswa" autocomplete="off" placeholder="Ketik nama siswa..." class="w-full border border-gray-200 rounded p-2.5 text-sm bg-white outline-none focus:border-[#198754]">
+                
+                <!-- SISWA & KELAS BARU -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1.5 uppercase">Siswa</label>
+                        <input type="text" id="input-kasus-siswa" list="list-semua-siswa" autocomplete="off" placeholder="Ketik nama siswa..." class="w-full border border-gray-200 rounded p-2.5 text-sm bg-white outline-none focus:border-[#198754]">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1.5 uppercase">Kelas (Pilih Jika Siswa Baru)</label>
+                        <select id="input-kasus-kelas" class="w-full border border-gray-200 rounded p-2.5 text-sm bg-white outline-none focus:border-[#198754]"></select>
+                    </div>
                 </div>
+
                 <div><label class="block text-xs font-semibold text-gray-600 mb-1.5 uppercase">Kasus / Pelanggaran</label><select id="input-kasus-jenis" class="w-full border border-gray-200 rounded p-2.5 text-sm bg-white outline-none focus:border-[#198754]"></select></div>
             </div>
             <div class="p-5 bg-gray-50 flex justify-end gap-3"><button onclick="tutupModalCatatKasus()" class="text-gray-600 font-medium text-sm px-5 py-2 rounded hover:bg-gray-100 transition">Batal</button><button onclick="simpanCatatanKasus()" class="bg-red-600 hover:bg-red-700 text-white font-medium text-sm px-6 py-2 rounded shadow-sm transition">Simpan Log Kasus</button></div>
@@ -814,7 +826,7 @@
 
     <!-- SEMUA LOGIKA JAVASCRIPT -->
     <script>
-        // --- DATA INDUK ---
+        // --- 1. DATA INDUK ---
         let currentUserRole = ''; 
         let currentSiswaName = '';
 
@@ -853,23 +865,33 @@
             alert('Fitur Edit Data akan berfungsi penuh jika terhubung ke backend database. Untuk prototipe silakan hapus dan input ulang.'); 
         }
 
+        // --- UPDATE DATALIST UNTUK AUTOCOMPLETE NAMA SISWA GLOBAL ---
         function updateDatalistSiswa(kelasFilter = "") {
             const dl = document.getElementById('list-semua-siswa');
             if(!dl) return;
             dl.innerHTML = '';
+            
             let filteredSiswa = dataSiswa;
-            if (kelasFilter && kelasFilter !== "" && kelasFilter !== "Semua") { filteredSiswa = dataSiswa.filter(s => s.kelas === kelasFilter); }
-            filteredSiswa.forEach(s => { dl.innerHTML += `<option value="${s.nama}">${s.nis} | Kelas ${s.kelas}</option>`; });
+            if (kelasFilter && kelasFilter !== "" && kelasFilter !== "Semua") {
+                filteredSiswa = dataSiswa.filter(s => s.kelas === kelasFilter);
+            }
+            
+            filteredSiswa.forEach(s => {
+                dl.innerHTML += `<option value="${s.nama}">${s.nis} | Kelas ${s.kelas}</option>`;
+            });
         }
 
+        // --- LOGIKA EDIT IDENTITAS SEKOLAH ---
         function bukaModalIdentitas() {
             document.getElementById('input-identitas-nama').value = document.getElementById('sidebar-school-name').innerText.replace(/\n/g, ' ');
-            document.getElementById('input-identitas-logo').value = ''; document.getElementById('modal-identitas').classList.remove('hidden');
+            document.getElementById('input-identitas-logo').value = '';
+            document.getElementById('modal-identitas').classList.remove('hidden');
         }
         function tutupModalIdentitas() { document.getElementById('modal-identitas').classList.add('hidden'); }
         function simpanIdentitas() {
             const namaBaru = document.getElementById('input-identitas-nama').value;
             if(namaBaru) { document.getElementById('sidebar-school-name').innerText = namaBaru; }
+            
             const fileInput = document.getElementById('input-identitas-logo');
             if(fileInput.files && fileInput.files[0]) {
                 const reader = new FileReader();
@@ -879,7 +901,8 @@
             tutupModalIdentitas();
         }
 
-        // --- ANIMASI LAMPU & LOGIN ---
+        // --- 2. AUTENTIKASI SINGLE SIGN-ON & ANIMASI LAMPU ---
+        const root = document.documentElement;
         const loginScreen = document.getElementById('login-screen');
         const lampLoginForm = document.querySelector('.lamp-login-form');
         const cordBead = document.querySelector('.cord-bead');
@@ -935,7 +958,7 @@
         }
         function logout() { location.reload(); }
 
-        // --- NAVIGASI ---
+        // --- 3. NAVIGASI ---
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobile-overlay');
@@ -959,7 +982,7 @@
             if(viewId === 'dashboard') updateDashboardData();
         }
 
-        // --- RENDER TABEL ---
+        // --- 4. RENDER SEMUA TABEL ---
         function renderSemuaData() {
             updateDatalistSiswa(); 
             renderTabelKelas(); renderTabelDataSiswa(); renderTabelJurusan(); 
@@ -1049,7 +1072,7 @@
             renderSemuaData(); tutupModalTambah();
         }
 
-        // --- SPLIT VIEW KASUS ---
+        // --- 6. LOGIKA KASUS (SPLIT VIEW) ---
         function renderTabelJenisKasus() {
             const tbody = document.getElementById('tbody-jeniskasus'); if(!tbody) return; tbody.innerHTML = '';
             masterJenisKasus.forEach((k, idx) => { 
@@ -1074,24 +1097,44 @@
         function bukaModalCatatKasus() {
             updateDatalistSiswa(); 
             document.getElementById('input-kasus-siswa').value = ''; 
+            
+            // Populasikan Dropdown Kelas
+            const selKelasKasus = document.getElementById('input-kasus-kelas');
+            selKelasKasus.innerHTML = '<option value="-">-- Pilih / Set Kelas --</option>';
+            masterKelas.forEach(k => { selKelasKasus.innerHTML += `<option value="${k.nama}">${k.nama}</option>`; });
+
             const selJenis = document.getElementById('input-kasus-jenis'); selJenis.innerHTML = ''; masterJenisKasus.forEach(k => { selJenis.innerHTML += `<option value="${k.nama}">[${k.kode}] - ${k.nama}</option>`; });
+            
             document.getElementById('input-kasus-tanggal').valueAsDate = new Date();
             document.getElementById('modal-catat-kasus').classList.remove('hidden');
         }
         function tutupModalCatatKasus() { document.getElementById('modal-catat-kasus').classList.add('hidden'); }
         
         function simpanCatatanKasus() {
-            const tgl = document.getElementById('input-kasus-tanggal').value, nama = document.getElementById('input-kasus-siswa').value, jenis = document.getElementById('input-kasus-jenis').value;
+            const tgl = document.getElementById('input-kasus-tanggal').value;
+            const nama = document.getElementById('input-kasus-siswa').value.trim(); 
+            const jenis = document.getElementById('input-kasus-jenis').value;
+            const kelasInput = document.getElementById('input-kasus-kelas').value;
+            
             if(!tgl || !nama) return alert("Pilih siswa dan tanggal!");
             
-            const validSiswa = dataSiswa.find(s => s.nama === nama);
-            if(!validSiswa) return alert("Siswa tidak ditemukan dalam database. Harap ketik dengan benar dari autocomplete.");
+            let validSiswa = dataSiswa.find(s => s.nama.toLowerCase() === nama.toLowerCase());
+            let kelasSiswa = validSiswa ? validSiswa.kelas : (kelasInput || "-");
+
+            // AUTO ADD SISWA BARU JIKA TIDAK DITEMUKAN DI DATABASE
+            if(!validSiswa) {
+                dataSiswa.push({ 
+                    nis: "NEW-" + Math.floor(Math.random()*9999), nisn: "-", nama: nama, jk: "-", 
+                    kelas: kelasSiswa !== "-" ? kelasSiswa : "-", pin: "123", status: "Aktif" 
+                });
+                updateDatalistSiswa(); renderTabelDataSiswa();
+            }
 
             const bulanIndex = parseInt(tgl.split('-')[1], 10) - 1; 
             const nomor = "BK-" + tgl.replace(/-/g, '').substring(0,6) + "-" + Math.floor(Math.random()*9999);
             
             logKonseling.unshift({ 
-                nomor, tanggal: tgl, tipe: 'individu', siswa: nama, kelas: validSiswa.kelas, 
+                nomor, tanggal: tgl, tipe: 'individu', siswa: nama, kelas: kelasSiswa, 
                 kategori: jenis, guruBk: "Admin BK", status: "Selesai", bulanIndex: bulanIndex, tahun: tgl.split('-')[0] 
             });
             
@@ -1111,16 +1154,13 @@
                             <td class="px-4 py-3 text-gray-500 text-sm">${k.tanggal}</td>
                             <td class="px-4 py-3 font-bold text-gray-800">${k.siswa}</td>
                             <td class="px-4 py-3 text-red-600 font-medium text-sm">${k.kategori}</td>
-                            <td class="text-center">
-                                <i class="fas fa-edit btn-aksi btn-edit" onclick="editDataDummy()"></i>
-                                <i class="fas fa-trash btn-aksi btn-delete" onclick="hapusKonselingData(${originalIndex})"></i>
-                            </td>
+                            <td class="text-center"><i class="fas fa-edit btn-aksi btn-edit" onclick="editDataDummy()"></i><i class="fas fa-trash btn-aksi btn-delete" onclick="hapusKonselingData(${originalIndex})"></i></td>
                         </tr>`;
                 });
             }
         }
 
-        // --- LAYANAN BK (KONSELING, SURAT) ---
+        // --- 7. LOGIKA LAYANAN BK (KONSELING, SURAT) ---
         let currentKonselingType = 'individu';
         
         function setKonselingType(tipe) {
@@ -1157,11 +1197,11 @@
             let finalSiswaText = ''; let finalKelas = '-';
 
             if (currentKonselingType === 'individu') {
-                finalSiswaText = document.getElementById('fkons-siswa-individu').value;
+                finalSiswaText = document.getElementById('fkons-siswa-individu').value.trim();
                 if(!finalSiswaText) return alert("Ketik dan pilih nama siswa!");
                 
-                const siswaObj = dataSiswa.find(s => s.nama === finalSiswaText); 
-                if (siswaObj) { finalKelas = siswaObj.kelas; } else { return alert("Siswa tidak ditemukan di database autocomplete!"); }
+                const siswaObj = dataSiswa.find(s => s.nama.toLowerCase() === finalSiswaText.toLowerCase()); 
+                if (siswaObj) { finalKelas = siswaObj.kelas; } 
             } else {
                 const selSiswaMulti = document.getElementById('fkons-siswa-kelompok');
                 const selectedOptions = Array.from(selSiswaMulti.selectedOptions);
@@ -1184,11 +1224,7 @@
 
             logKonseling.forEach((k, idx) => {
                 let statusBadge = k.status === 'Selesai' ? 'bg-emerald-50 text-[#198754]' : 'bg-orange-50 text-orange-600';
-                let btnAksi = `
-                    <i class="fas fa-eye btn-aksi btn-view" onclick="alert('Lihat detail konseling')"></i> 
-                    <i class="fas fa-edit btn-aksi btn-edit" onclick="editDataDummy()"></i> 
-                    <i class="fas fa-trash btn-aksi btn-delete" onclick="hapusKonselingData(${idx})"></i>
-                `;
+                let btnAksi = `<i class="fas fa-eye btn-aksi btn-view" onclick="alert('Lihat detail konseling')"></i> <i class="fas fa-edit btn-aksi btn-edit" onclick="editDataDummy()"></i> <i class="fas fa-trash btn-aksi btn-delete" onclick="hapusKonselingData(${idx})"></i>`;
 
                 let htmlRow = `
                     <tr class="hover:bg-gray-50 transition">
@@ -1225,11 +1261,18 @@
         }
         
         function simpanSurat() {
-            const jenis = document.getElementById('fsurat-jenis').value, tgl = document.getElementById('fsurat-tanggal').value, siswa = document.getElementById('fsurat-siswa').value, perihal = document.getElementById('fsurat-perihal').value || '-';
+            const jenis = document.getElementById('fsurat-jenis').value, tgl = document.getElementById('fsurat-tanggal').value, siswa = document.getElementById('fsurat-siswa').value.trim(), perihal = document.getElementById('fsurat-perihal').value || '-';
             
-            if(!siswa) return alert("Nama siswa dari autocomplete wajib diisi!");
-            const validSiswa = dataSiswa.find(s => s.nama === siswa);
-            if(!validSiswa) return alert("Siswa tidak ditemukan dalam database. Harap pilih dari rekomendasi autocomplete.");
+            if(!siswa) return alert("Ketik nama siswa!");
+            let validSiswa = dataSiswa.find(s => s.nama.toLowerCase() === siswa.toLowerCase());
+            
+            if(!validSiswa) {
+                dataSiswa.push({ 
+                    nis: "NEW-" + Math.floor(Math.random()*9999), nisn: "-", nama: siswa, jk: "-", 
+                    kelas: "-", pin: "123", status: "Aktif" 
+                });
+                updateDatalistSiswa(); renderTabelDataSiswa();
+            }
 
             const nomor = "00" + (dataSurat.length + 1) + "/BK/" + tgl.split('-')[0];
             dataSurat.unshift({ nomor, jenis, tanggal: tgl, siswa, perihal, status: "Terbit" });
@@ -1250,7 +1293,7 @@
             });
         }
 
-        // --- KEHADIRAN ---
+        // --- 8. LOGIKA KEHADIRAN ---
         function renderTabelKehadiran() {
             const tbody = document.getElementById('tabel-hasil-kehadiran'); if(!tbody) return; tbody.innerHTML = '';
             const filterKelas = document.getElementById('filter-kehadiran-kelas');
@@ -1286,15 +1329,27 @@
         function tutupModalKehadiran() { document.getElementById('modal-kehadiran').classList.add('hidden'); }
         
         function simpanKehadiran() {
-            const tgl = document.getElementById('input-keh-tanggal').value, nama = document.getElementById('input-keh-siswa').value, status = document.getElementById('input-keh-status').value;
-            if(!nama) return alert("Ketik dan pilih nama siswa dari autocomplete!"); 
-            const validSiswa = dataSiswa.find(s => s.nama === nama);
-            if(!validSiswa) return alert("Siswa tidak ditemukan dalam database. Harap pilih dari rekomendasi autocomplete.");
+            const tgl = document.getElementById('input-keh-tanggal').value, nama = document.getElementById('input-keh-siswa').value.trim(), status = document.getElementById('input-keh-status').value;
+            const kelasInput = document.getElementById('input-keh-kelas').value;
+            
+            if(!nama) return alert("Ketik nama siswa!"); 
+            
+            let validSiswa = dataSiswa.find(s => s.nama.toLowerCase() === nama.toLowerCase());
+            let kelasSiswa = validSiswa ? validSiswa.kelas : (kelasInput || "-");
 
-            logKehadiran.unshift({ tgl, nama, kelas: validSiswa.kelas, status, ket: '-' }); renderTabelKehadiran(); tutupModalKehadiran();
+            if(!validSiswa) {
+                dataSiswa.push({ 
+                    nis: "NEW-" + Math.floor(Math.random()*9999), nisn: "-", nama: nama, jk: "-", 
+                    kelas: kelasSiswa !== "-" ? kelasSiswa : "-", pin: "123", status: "Aktif" 
+                });
+                updateDatalistSiswa(); renderTabelDataSiswa(); updateDashboardData();
+            }
+
+            logKehadiran.unshift({ tgl, nama, kelas: kelasSiswa, status, ket: '-' }); 
+            renderTabelKehadiran(); tutupModalKehadiran();
         }
 
-        // --- EKSPOR & IMPOR ---
+        // --- 9. EKSPOR & IMPOR ---
         function toggleDropdown(event, id) { event.stopPropagation(); document.getElementById(id).classList.toggle('hidden'); }
         
         function eksporData(format) {
@@ -1314,7 +1369,7 @@
             }
         }
 
-        // --- DASHBOARD GRAFIK & WIDGET ---
+        // --- 10. DASHBOARD GRAFIK & WIDGET ---
         function updateDashboardData() {
             document.getElementById('stat-total-siswa').innerText = dataSiswa.length; 
             document.getElementById('stat-kasus-hari-ini').innerText = logKonseling.length; 
@@ -1386,7 +1441,7 @@
             }
         }
 
-        // --- MISI KESISWAAN ---
+        // --- 11. MISI KESISWAAN ---
         function renderMisiSiswa() {
             const container = document.getElementById('misi-kesiswaan'); 
             if(!container) return;
