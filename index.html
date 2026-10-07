@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduNav BK Pro V3.8 - Compact, Pelanggaran Terpadu & Asesmen Diri</title>
+    <title>SIBKA - Sistem Informasi Bimbingan Konseling Siswa</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -354,25 +354,59 @@
     <div id="login-screen" data-on="false" class="fixed inset-0 z-50 flex items-center justify-center">
         <div id="login-screen-content" class="flex flex-col md:flex-row items-center justify-center gap-10 w-full max-w-5xl relative z-10 px-4">
             
-            <!-- SVG Lampu -->
-            <div class="lamp-wrapper">
-                <svg class="lamp-svg" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
-                    <ellipse class="inner-glow" cx="100" cy="110" rx="60" ry="30" />
-                    <rect class="lamp-base" x="92" y="100" width="16" height="160" rx="8" />
-                    <rect class="lamp-base" x="60" y="250" width="80" height="12" rx="6" />
-                    <g class="pull-cord">
-                        <line class="cord-line" x1="130" y1="110" x2="130" y2="180" />
-                        <circle class="cord-bead" cx="130" cy="190" r="6" />
-                        <circle class="cord-hit" cx="130" cy="190" r="25" />
-                    </g>
-                    <!-- Mushroom Shade -->
-                    <path class="lamp-shade" d="M30 110 C 30 50, 170 50, 170 110 C 170 125, 30 125, 30 110 Z" />
-                </svg>
+            <!-- SVG Lampu + PETUNJUK YANG TERLIHAT SEBELUM LAMPU DINYALAKAN -->
+            <div class="flex flex-col items-center justify-center">
+                <div class="lamp-wrapper">
+                    <svg class="lamp-svg" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse class="inner-glow" cx="100" cy="110" rx="60" ry="30" />
+                        <rect class="lamp-base" x="92" y="100" width="16" height="160" rx="8" />
+                        <rect class="lamp-base" x="60" y="250" width="80" height="12" rx="6" />
+                        <g class="pull-cord">
+                            <line class="cord-line" x1="130" y1="110" x2="130" y2="180" />
+                            <circle class="cord-bead" cx="130" cy="190" r="6" />
+                            <circle class="cord-hit" cx="130" cy="190" r="25" />
+                        </g>
+                        <!-- Mushroom Shade -->
+                        <path class="lamp-shade" d="M30 110 C 30 50, 170 50, 170 110 C 170 125, 30 125, 30 110 Z" />
+                    </svg>
+                </div>
+
+                <!-- TAMBAHAN: PETUNJUK TERLIHAT SEJAK AWAL -->
+                <div class="w-[290px] -mt-5 md:-mt-3 text-center relative z-20">
+                    <div class="bg-white/[0.06] border border-white/10 backdrop-blur-md rounded-2xl px-4 py-4 shadow-2xl">
+                        <div class="flex items-center justify-center gap-2 text-[#f5d98f] text-xs font-semibold mb-1">
+                            <i class="fas fa-wand-magic-sparkles"></i>
+                            BARU PERTAMA KALI?
+                        </div>
+                        <p class="text-[11px] leading-relaxed text-gray-400 mb-3">
+                            Baca petunjuk singkat terlebih dahulu, atau tarik tali lampu untuk mulai masuk ke sistem.
+                        </p>
+                        <button
+                            type="button"
+                            onclick="bukaPetunjukSistem()"
+                            class="group w-full rounded-xl border border-[#d4a373]/40 bg-[#d4a373]/10 hover:bg-[#d4a373] text-[#f1d6a7] hover:text-[#121417] px-4 py-2.5 text-xs font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#d4a373]/20 flex items-center justify-center gap-2"
+                        >
+                            <span class="w-6 h-6 rounded-full bg-white/10 group-hover:bg-black/10 flex items-center justify-center">
+                                <i class="fas fa-circle-info"></i>
+                            </span>
+                            Lihat Petunjuk Penggunaan
+                        </button>
+                    </div>
+                    <div class="mt-3 text-[10px] text-gray-500 flex items-center justify-center gap-1.5">
+                        <i class="fas fa-arrow-up-long text-[#d4a373]"></i>
+                        Tarik tali lampu untuk menampilkan form login
+                    </div>
+                </div>
             </div>
 
             <!-- Area Formulir Login & Register -->
             <div class="lamp-login-form">
-                <h2 id="form-title">Portal EduNav BK</h2>
+                <div class="text-center mb-4">
+                    <h2 id="form-title" class="!mb-1 !text-2xl !font-bold">SIBKA</h2>
+                    <p id="form-subtitle" class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                        (Sistem Informasi Bimbingan Konseling Siswa)
+                    </p>
+                </div>
                 
                 <!-- FORM LOGIN -->
                 <form id="form-login" onsubmit="return false;">
@@ -390,6 +424,7 @@
                     <p class="text-center text-xs text-gray-400 mt-4 cursor-pointer hover:text-white transition" onclick="toggleModeLogin('register')">
                         Siswa Baru? Buat Akun / Daftar Mandiri
                     </p>
+
                 </form>
 
                 <!-- FORM REGISTER SISWA (BARU) -->
@@ -439,6 +474,103 @@
         </div>
     </div>
 
+
+    <!-- ===================================================== -->
+    <!-- TAMBAHAN: MODAL PETUNJUK & INFORMASI SISTEM -->
+    <!-- ===================================================== -->
+    <div id="modal-petunjuk-sistem" class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+        <div class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
+            <div class="bg-[#0f5132] text-white px-6 py-5 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white/15 rounded-xl flex items-center justify-center"><i class="fas fa-circle-info text-lg"></i></div>
+                    <div>
+                        <h2 class="font-bold text-lg">Petunjuk Penggunaan SIBKA</h2>
+                        <p class="text-xs text-emerald-100 mt-0.5">Panduan awal Admin Sekolah, Guru BK, dan Siswa</p>
+                    </div>
+                </div>
+                <button type="button" onclick="tutupPetunjukSistem()" class="w-9 h-9 rounded-lg hover:bg-white/10 transition flex items-center justify-center" title="Tutup"><i class="fas fa-times"></i></button>
+            </div>
+
+            <div class="p-6 overflow-y-auto space-y-6">
+                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+                    <div class="flex gap-3">
+                        <i class="fas fa-school text-[#198754] mt-0.5"></i>
+                        <div>
+                            <h3 class="font-bold text-gray-800">Tentang SIBKA</h3>
+                            <p class="text-sm text-gray-600 mt-1 leading-relaxed">SIBKA (Sistem Informasi Bimbingan Konseling Siswa) membantu pengelolaan akun, data siswa, layanan BK, absensi, pelanggaran, asesmen, konseling, dan informasi perkembangan siswa secara terintegrasi.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fas fa-user-tie text-blue-600"></i>Cara Menggunakan Akun Guru BK</h3>
+                    <div class="space-y-3">
+                        <div class="flex gap-3 bg-gray-50 border border-gray-200 rounded-xl p-4"><div class="w-8 h-8 shrink-0 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">1</div><div><p class="font-semibold text-gray-800 text-sm">Login ke akun Admin Sekolah</p><p class="text-xs text-gray-600 mt-1">Masuk terlebih dahulu menggunakan akun Admin Sekolah karena pembuatan akun Guru BK dilakukan melalui halaman Admin.</p></div></div>
+                        <div class="flex gap-3 bg-gray-50 border border-gray-200 rounded-xl p-4"><div class="w-8 h-8 shrink-0 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">2</div><div><p class="font-semibold text-gray-800 text-sm">Buat akun Guru BK</p><p class="text-xs text-gray-600 mt-1">Pada halaman Admin Sekolah, pilih pengelolaan akun Guru BK lalu isi NIP/ID Guru, nama Guru BK, dan password awal.</p></div></div>
+                        <div class="flex gap-3 bg-gray-50 border border-gray-200 rounded-xl p-4"><div class="w-8 h-8 shrink-0 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">3</div><div><p class="font-semibold text-gray-800 text-sm">Masuk ke akun Guru BK dan ganti password</p><p class="text-xs text-gray-600 mt-1">Login menggunakan NIP/ID Guru dan password awal dari Admin. Pada login pertama, Guru BK wajib mengganti password awal dengan password baru.</p></div></div>
+                        <div class="flex gap-3 bg-gray-50 border border-gray-200 rounded-xl p-4"><div class="w-8 h-8 shrink-0 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">4</div><div><p class="font-semibold text-gray-800 text-sm">Konfirmasi akun siswa</p><p class="text-xs text-gray-600 mt-1">Buka menu <b>Data Siswa</b>, kemudian lihat siswa yang sudah melakukan pendaftaran mandiri dan berikan konfirmasi/persetujuan akun agar siswa dapat masuk ke Portal Siswa.</p></div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fas fa-th-large text-blue-600"></i>Fitur yang Dapat Digunakan Guru BK</h3>
+                    <p class="text-xs text-gray-500 mb-3">Setelah berhasil masuk, Guru BK dapat menggunakan menu berikut untuk mengelola data siswa dan layanan Bimbingan Konseling.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="fas fa-desktop text-blue-600 mr-2"></i>Dashboard</p><p class="text-gray-600 mt-1">Melihat ringkasan jumlah siswa, pelanggaran, konseling, grafik, dan informasi penting lainnya.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="fas fa-users text-blue-600 mr-2"></i>Data Siswa</p><p class="text-gray-600 mt-1">Mengelola data siswa serta mengonfirmasi akun siswa yang melakukan pendaftaran mandiri.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="fas fa-chalkboard text-blue-600 mr-2"></i>Kelas</p><p class="text-gray-600 mt-1">Menambah, melihat, dan mengelola data kelas.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="fas fa-book text-blue-600 mr-2"></i>Jurusan</p><p class="text-gray-600 mt-1">Mengelola data jurusan yang digunakan dalam pengelompokan siswa dan kelas.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="far fa-calendar-alt text-blue-600 mr-2"></i>Tahun Pelajaran</p><p class="text-gray-600 mt-1">Mengatur tahun pelajaran yang digunakan dalam sistem.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="fas fa-layer-group text-blue-600 mr-2"></i>Semester</p><p class="text-gray-600 mt-1">Mengatur semester aktif sebagai periode pencatatan data siswa.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="fas fa-user-tie text-blue-600 mr-2"></i>Wali Kelas</p><p class="text-gray-600 mt-1">Mengelola data wali kelas dan menghubungkannya dengan kelas masing-masing.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="fas fa-exclamation-triangle text-blue-600 mr-2"></i>Jenis Kasus</p><p class="text-gray-600 mt-1">Mengatur kategori atau jenis pelanggaran yang dapat dicatat kepada siswa.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="far fa-check-square text-blue-600 mr-2"></i>Absensi</p><p class="text-gray-600 mt-1">Melihat dan mengelola data kehadiran siswa.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="fas fa-file-medical text-blue-600 mr-2"></i>Pengajuan Sakit / Izin</p><p class="text-gray-600 mt-1">Memeriksa dan menyetujui pengajuan sakit atau izin dari siswa.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="fas fa-exclamation-circle text-blue-600 mr-2"></i>Pelanggaran</p><p class="text-gray-600 mt-1">Mencatat, melihat, dan mengelola riwayat pelanggaran siswa.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="fas fa-file-alt text-blue-600 mr-2"></i>Raport Siswa</p><p class="text-gray-600 mt-1">Melihat data raport dan perkembangan akademik siswa sebagai informasi pendukung layanan BK.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="fas fa-user-check text-blue-600 mr-2"></i>Kedisiplinan</p><p class="text-gray-600 mt-1">Melihat dan mengelola informasi kedisiplinan siswa.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="fas fa-brain text-blue-600 mr-2"></i>Hasil Asesmen Siswa</p><p class="text-gray-600 mt-1">Melihat hasil asesmen diri siswa sebagai bahan pertimbangan dalam layanan BK.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="fas fa-user text-blue-600 mr-2"></i>Konseling Individu</p><p class="text-gray-600 mt-1">Mencatat dan mengelola proses konseling individu antara Guru BK dan siswa.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3"><p class="font-bold text-gray-800"><i class="fas fa-history text-blue-600 mr-2"></i>Riwayat Konseling</p><p class="text-gray-600 mt-1">Melihat kembali catatan dan riwayat layanan konseling yang sudah dilakukan.</p></div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-3 md:col-span-2"><p class="font-bold text-gray-800"><i class="fas fa-envelope text-blue-600 mr-2"></i>Surat</p><p class="text-gray-600 mt-1">Membuat dan mengelola surat yang berkaitan dengan layanan Bimbingan dan Konseling kepada siswa.</p></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fas fa-user-graduate text-[#198754]"></i>Cara Menggunakan Akun Siswa</h3>
+                    <div class="space-y-3">
+                        <div class="flex gap-3 bg-gray-50 border border-gray-200 rounded-xl p-4"><div class="w-8 h-8 shrink-0 rounded-full bg-[#198754] text-white flex items-center justify-center font-bold text-sm">1</div><div><p class="font-semibold text-gray-800 text-sm">Buat akun siswa terlebih dahulu</p><p class="text-xs text-gray-600 mt-1">Pada halaman login, pilih <b>Siswa Baru? Buat Akun / Daftar Mandiri</b>, lalu isi NIS/NISN, nama lengkap, jenis kelamin, kelas, dan password.</p></div></div>
+                        <div class="flex gap-3 bg-gray-50 border border-gray-200 rounded-xl p-4"><div class="w-8 h-8 shrink-0 rounded-full bg-[#198754] text-white flex items-center justify-center font-bold text-sm">2</div><div><p class="font-semibold text-gray-800 text-sm">Konfirmasi pembuatan akun ke Guru BK</p><p class="text-xs text-gray-600 mt-1">Setelah mendaftar, akun siswa perlu dikonfirmasi oleh Guru BK. Jika diperlukan, beri tahu Guru BK bahwa pendaftaran akun sudah dilakukan.</p></div></div>
+                        <div class="flex gap-3 bg-gray-50 border border-gray-200 rounded-xl p-4"><div class="w-8 h-8 shrink-0 rounded-full bg-[#198754] text-white flex items-center justify-center font-bold text-sm">3</div><div><p class="font-semibold text-gray-800 text-sm">Masuk ke akun siswa yang telah dikonfirmasi</p><p class="text-xs text-gray-600 mt-1">Setelah akun disetujui Guru BK, kembali ke halaman login lalu masukkan NIS/NISN atau nama lengkap dan password yang sudah dibuat.</p></div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fas fa-th-large text-[#198754]"></i>Fitur yang Dapat Digunakan Siswa</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs">
+                        <div class="bg-gray-50 border rounded-lg p-3"><i class="fas fa-chart-line text-[#198754] mr-1"></i> Perkembangan</div>
+                        <div class="bg-gray-50 border rounded-lg p-3"><i class="fas fa-file-alt text-[#198754] mr-1"></i> Raport Saya</div>
+                        <div class="bg-gray-50 border rounded-lg p-3"><i class="fas fa-user-check text-[#198754] mr-1"></i> Kedisiplinan</div>
+                        <div class="bg-gray-50 border rounded-lg p-3"><i class="fas fa-tasks text-[#198754] mr-1"></i> Asesmen Diri</div>
+                        <div class="bg-gray-50 border rounded-lg p-3"><i class="fas fa-calendar-check text-[#198754] mr-1"></i> Absensi</div>
+                        <div class="bg-gray-50 border rounded-lg p-3"><i class="fas fa-file-medical text-[#198754] mr-1"></i> Sakit / Izin</div>
+                        <div class="bg-gray-50 border rounded-lg p-3"><i class="fas fa-exclamation-circle text-[#198754] mr-1"></i> Pelanggaran</div>
+                        <div class="bg-gray-50 border rounded-lg p-3"><i class="fas fa-comments text-[#198754] mr-1"></i> Konseling</div>
+                        <div class="bg-gray-50 border rounded-lg p-3"><i class="fas fa-envelope-open-text text-[#198754] mr-1"></i> Surat Guru BK</div>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                    <div class="flex gap-3"><i class="fas fa-shield-halved text-amber-500 mt-0.5"></i><div><h4 class="font-bold text-sm text-amber-800">Catatan Penting</h4><p class="text-xs text-amber-700 mt-1 leading-relaxed">Gunakan akun sesuai hak akses masing-masing dan jangan memberikan password kepada orang lain. Jika siswa belum dapat login setelah mendaftar, pastikan akun sudah dikonfirmasi oleh Guru BK. Jika Guru BK mengalami kendala akun, hubungi Admin Sekolah.</p></div></div>
+                </div>
+            </div>
+
+            <div class="px-6 py-4 border-t bg-gray-50 flex justify-end">
+                <button type="button" onclick="tutupPetunjukSistem()" class="bg-[#198754] hover:bg-emerald-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition"><i class="fas fa-check mr-1"></i> Mengerti</button>
+            </div>
+        </div>
+    </div>
+
     <div id="admin-container" class="hidden fixed inset-0 z-[80] bg-gray-100 overflow-y-auto">
       <header class="bg-[#0f172a] text-white px-6 py-4 flex justify-between items-center shadow">
         <div><h1 class="text-xl font-bold"><i class="fas fa-shield-alt mr-2"></i>Admin Sekolah</h1><p class="text-xs text-slate-300">Pengelolaan akun Guru BK</p></div>
@@ -451,6 +583,41 @@
     </div>
     <div id="modal-admin-guru" class="fixed inset-0 bg-black/40 hidden items-center justify-center z-[130] p-4"><div class="bg-white rounded-lg shadow-xl w-full max-w-lg"><div class="p-5 border-b"><h3 class="font-bold text-lg">Tambah Guru BK</h3></div><div class="p-5 space-y-4"><input id="admin-guru-id" class="w-full border rounded p-2.5" placeholder="NIP / ID Guru"><input id="admin-guru-nama" class="w-full border rounded p-2.5" placeholder="Nama Guru BK"><input id="admin-guru-pass" type="password" class="w-full border rounded p-2.5" placeholder="Password awal minimal 8 karakter"></div><div class="p-5 bg-gray-50 flex justify-end gap-2"><button onclick="tutupModalGuruV37()" class="border px-4 py-2 rounded">Batal</button><button onclick="simpanGuruAdminV37()" class="bg-[#198754] text-white px-4 py-2 rounded font-bold">Buat Akun</button></div></div></div>
     <div id="modal-ganti-pass-guru" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-[150] p-4"><div class="bg-white rounded-lg shadow-xl w-full max-w-md"><div class="p-6 border-b"><h3 class="font-bold text-lg">Ganti Password Guru BK</h3><p class="text-sm text-gray-500 mt-2">Login pertama wajib mengganti password awal dari Admin.</p></div><div class="p-6 space-y-4"><input type="hidden" id="gp-id"><input id="gp-pass1" type="password" class="w-full border rounded p-2.5" placeholder="Password baru minimal 8 karakter"><input id="gp-pass2" type="password" class="w-full border rounded p-2.5" placeholder="Ulangi password baru"></div><div class="p-6 bg-gray-50"><button onclick="simpanPassGuruV37()" class="w-full bg-[#198754] text-white py-2.5 rounded font-bold">Simpan & Masuk</button></div></div></div>
+
+    <!-- ==================== MODAL EDIT IDENTITAS PENYUSUN SIBKA ==================== -->
+    <div id="modal-kredit-sibka" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-[210] p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden">
+            <div class="bg-[#0f5132] text-white px-6 py-5 flex items-center justify-between">
+                <div>
+                    <h3 class="font-bold text-lg"><i class="fas fa-pen-to-square mr-2"></i>Edit Identitas Penyusun</h3>
+                    <p class="text-xs text-emerald-100 mt-1">Ubah tulisan dan nama yang tampil di bagian bawah sidebar.</p>
+                </div>
+                <button type="button" onclick="tutupModalKreditSIBKA()" class="w-9 h-9 rounded-lg hover:bg-white/10 transition"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1.5">Judul / Keterangan</label>
+                    <input id="edit-credit-title" type="text" class="w-full border border-gray-200 rounded-lg p-2.5 text-sm" placeholder="Contoh: MANAJEMEN PESERTA DIDIK - 2026/2027">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1.5">Nama 1</label>
+                    <input id="edit-credit-name-1" type="text" class="w-full border border-gray-200 rounded-lg p-2.5 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1.5">Nama 2</label>
+                    <input id="edit-credit-name-2" type="text" class="w-full border border-gray-200 rounded-lg p-2.5 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1.5">Nama 3</label>
+                    <input id="edit-credit-name-3" type="text" class="w-full border border-gray-200 rounded-lg p-2.5 text-sm">
+                </div>
+            </div>
+            <div class="px-6 py-4 bg-gray-50 border-t flex justify-end gap-2">
+                <button type="button" onclick="tutupModalKreditSIBKA()" class="border border-gray-300 px-4 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-100">Batal</button>
+                <button type="button" onclick="simpanKreditSIBKA()" class="bg-[#198754] hover:bg-emerald-700 text-white px-5 py-2 rounded-lg text-sm font-bold"><i class="fas fa-save mr-1"></i>Simpan</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Overlay Mobile untuk Sidebar -->
     <div id="mobile-overlay" class="fixed inset-0 bg-slate-900/50 z-20 hidden md:hidden" onclick="toggleSidebar()"></div>
@@ -593,12 +760,17 @@
         </nav>
 
         <div class="p-4 border-t border-emerald-800/50">
-            <p class="text-[10px] text-emerald-300 text-center mb-3">
-                MANAJEMEN PESERTA DIDIK - 2026/2027<br>
-                Ach Faizol M. (125)<br>
-                Meilina Nuril Maulida (128)<br> 
-                Lenita Rahmawati (138)
-            </p>
+            <div id="sidebar-credit-box" class="group relative mb-3 rounded-lg px-2 py-2 hover:bg-emerald-800/30 transition cursor-pointer" onclick="bukaModalKreditSIBKA()" title="Klik untuk edit identitas penyusun">
+                <p class="text-[10px] text-emerald-300 text-center leading-relaxed">
+                    <span id="credit-title">MANAJEMEN PESERTA DIDIK - 2026/2027</span><br>
+                    <span id="credit-name-1">Ach Faizol M. (125)</span><br>
+                    <span id="credit-name-2">Meilina Nuril Maulida (128)</span><br>
+                    <span id="credit-name-3">Lenita Rahmawati (138)</span>
+                </p>
+                <span class="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity text-emerald-200 text-[10px]">
+                    <i class="fas fa-pen"></i>
+                </span>
+            </div>
             <button onclick="logout()" class="w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-emerald-50 bg-emerald-800/60 hover:bg-emerald-700 rounded-lg transition">
                 <i class="fas fa-sign-out-alt"></i> Keluar
             </button>
@@ -2206,11 +2378,19 @@
         function toggleModeLogin(mode) {
             const a=document.getElementById('form-login'),b=document.getElementById('form-register');
             [a,b].forEach(x=>x&&x.classList.add('hidden'));
+            const title = document.getElementById('form-title');
+            const subtitle = document.getElementById('form-subtitle');
             if(mode==='register'){
-                b.classList.remove('hidden');document.getElementById('form-title').innerText="Daftar Akun Siswa";
+                b.classList.remove('hidden');
+                if(title) title.innerText="Daftar Akun Siswa";
+                if(subtitle) subtitle.innerText="SIBKA (Sistem Informasi Bimbingan Konseling Siswa)";
                 const sel=document.getElementById('reg-kelas');
                 if(sel){sel.innerHTML='<option value="-">-- Pilih Kelas --</option>';masterKelas.forEach(k=>sel.innerHTML+=`<option value="${k.nama}">${k.nama}</option>`);}
-            }else{a.classList.remove('hidden');document.getElementById('form-title').innerText="Portal EduNav BK";}
+            }else{
+                a.classList.remove('hidden');
+                if(title) title.innerText="SIBKA";
+                if(subtitle) subtitle.innerText="(Sistem Informasi Bimbingan Konseling Siswa)";
+            }
         }
 
         // Normalisasi ID agar pencarian NIS/NISN konsisten dari form, import, dan localStorage.
@@ -4776,5 +4956,81 @@
         <div class="p-5 bg-gray-50 border-t flex justify-end gap-2"><button onclick="tutupAsesmenV38()" class="border px-4 py-2 rounded text-sm">Batal</button><button onclick="simpanAsesmenV38()" class="bg-[#198754] text-white px-4 py-2 rounded text-sm font-bold">Simpan Hasil</button></div>
       </div>
     </div>
+
+<script>
+// ========================================================
+// TAMBAHAN: PETUNJUK & INFORMASI SISTEM
+// ========================================================
+function bukaPetunjukSistem() {
+    const modal = document.getElementById('modal-petunjuk-sistem');
+    if (!modal) return;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+function tutupPetunjukSistem() {
+    const modal = document.getElementById('modal-petunjuk-sistem');
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('modal-petunjuk-sistem');
+    if (modal && event.target === modal) tutupPetunjukSistem();
+});
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') tutupPetunjukSistem();
+});
+
+
+        // ==================== EDIT IDENTITAS PENYUSUN SIBKA ====================
+        function muatKreditSIBKA() {
+            try {
+                const data = JSON.parse(localStorage.getItem('sibka_credit') || '{}');
+                if (data.title) document.getElementById('credit-title').textContent = data.title;
+                if (data.name1) document.getElementById('credit-name-1').textContent = data.name1;
+                if (data.name2) document.getElementById('credit-name-2').textContent = data.name2;
+                if (data.name3) document.getElementById('credit-name-3').textContent = data.name3;
+            } catch (e) {}
+        }
+
+        function bukaModalKreditSIBKA() {
+            const modal = document.getElementById('modal-kredit-sibka');
+            if (!modal) return;
+            document.getElementById('edit-credit-title').value = document.getElementById('credit-title').textContent.trim();
+            document.getElementById('edit-credit-name-1').value = document.getElementById('credit-name-1').textContent.trim();
+            document.getElementById('edit-credit-name-2').value = document.getElementById('credit-name-2').textContent.trim();
+            document.getElementById('edit-credit-name-3').value = document.getElementById('credit-name-3').textContent.trim();
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function tutupModalKreditSIBKA() {
+            const modal = document.getElementById('modal-kredit-sibka');
+            if (!modal) return;
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function simpanKreditSIBKA() {
+            const title = document.getElementById('edit-credit-title').value.trim();
+            const name1 = document.getElementById('edit-credit-name-1').value.trim();
+            const name2 = document.getElementById('edit-credit-name-2').value.trim();
+            const name3 = document.getElementById('edit-credit-name-3').value.trim();
+
+            document.getElementById('credit-title').textContent = title || 'MANAJEMEN PESERTA DIDIK - 2026/2027';
+            document.getElementById('credit-name-1').textContent = name1 || '-';
+            document.getElementById('credit-name-2').textContent = name2 || '-';
+            document.getElementById('credit-name-3').textContent = name3 || '-';
+
+            localStorage.setItem('sibka_credit', JSON.stringify({ title, name1, name2, name3 }));
+            tutupModalKreditSIBKA();
+        }
+
+        document.addEventListener('DOMContentLoaded', muatKreditSIBKA);
+</script>
+
 </body>
 </html>
